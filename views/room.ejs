@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <script>
         const ROOM_ID = "<%= roomId %>";
     </script>
@@ -24,20 +25,25 @@
 
                 </div>
             </div>
+            <div class="emoji-action" id="emoji-action"></div>
+            <div class="emoji-animation-container" id="emoji-animation">
+                <button class="emoji-button" data-emoji="😊">😊</button>
+                <button class="emoji-button" data-emoji="👍">👍</button>
+                <button class="emoji-button" data-emoji="❤️">❤️</button>
+                <button class="emoji-button" data-emoji="😂">😂</button>
+                <button class="emoji-button" data-emoji="👋">👋</button>
+            </div>
             <div class="main_controls">
+                
                 <div class="main_controls_block">
-                    <div  onclick="muteUnmute()" class="main_controls_button main_mute_button">
-                        <i class="fa-solid fa-microphone"></i>
-                        <span>Mute</span>
+                    <div class="main_controls_button">
+                        <span class="leave_meeting">Leave Meeting</span>
                     </div>
-                    <div onclick="playStop()" class="main_controls_button main_video_button">
-                        <i class="fa-solid fa-video"></i>
-                        <span>Stop video</span>
-                    </div>
+                    
                 </div>
                     <div class="main_controls_block">
 
-                        <div class="main_controls_button">
+                        <!-- <div class="main_controls_button">
                             <i class="fas fa-shield-alt"></i>
                             <span>Security</span>
                         </div>
@@ -48,20 +54,29 @@
                         <div class="main_controls_button">
                             <i class="fas fa-comment-alt"></i>
                             <span>Chat</span>
+                        </div> -->
+                        <div  onclick="muteUnmute()" class="main_controls_button main_mute_button">
+                            <i class="fa-solid fa-microphone"></i>
+                            <span>Mute</span>
                         </div>
-
+                        <div onclick="playStop()" class="main_controls_button main_video_button">
+                            <i class="fa-solid fa-video"></i>
+                            <span>Stop video</span>
+                        </div>
+                       
+                        
                     </div>
+                   
 
                 <div class="main_controls_block">
-                    <div class="main_controls_button">
-                        <span class="leave_meeting">Leave Meeting</span>
-                    </div>
+                  
+                    <span id="current-time" style="margin-top: 13px; margin-right: 6px ;font-size: large;"></span>
                 </div>
             </div>
         </div>
         <div class="main_right">
             <div class="main_header">
-                <h6>Chat</h6>
+                <h6 style="font-size: large;">Chat </h6>
             </div>
             <div class="main_chat_window">
                 <ul class="messages" >
@@ -69,7 +84,8 @@
                 </ul>
             </div>
             <div class="main_messages_container">
-                <input id="chat_messages" type="text" placeholder="Type message here... ">
+                <input id="chat_messages" type="text" placeholder="Type message here... " 
+                style="padding: 3%; background-color: rgb(255, 192, 192); color: black;" >
             </div>
         </div>
 

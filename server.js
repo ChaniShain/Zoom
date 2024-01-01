@@ -33,9 +33,11 @@ io.on('connection', socket => {
         socket.broadcast.to(roomId).emit("user-connected", userId);
         // socket.to(roomId).emit("user-connected");
 
-        socket.on('message', message => {
-            io.to(roomId).emit('createMessage', message)
+       
+        socket.on('emoji', emoji => {
+            io.to(roomId).emit('emoji-selected', emoji)
         })
+
 
         socket.on('disconnect', () => {
             //We want to broadcast on exiting of a person
