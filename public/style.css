@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #video-grid {
@@ -88,7 +89,7 @@ video {
 
 .main_chat_window {
     flex-grow: 1;
-    overflow-y: scroll ;
+    overflow-y: scroll;
 }
 
 .main_messages_container {
@@ -103,7 +104,8 @@ video {
     color: #F5F5F5;
 
 }
-.messages{
+
+.messages {
     color: white;
 }
 
@@ -111,7 +113,6 @@ video {
     color: #CC3B33;
 }
 
-.stop{
+.stop {
     color: #CC3B33;
-
 }
