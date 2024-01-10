@@ -1,5 +1,72 @@
 
 const socket = io('/');
+// $(document).ready(function(){
+//   setTimeout(function(){
+//      PopUp();
+//   },1000); // 5000 to load it after 5 seconds from page load
+// });
+const nameInput = document.getElementById('name');
+const popup = document.getElementById('popup');
+const acwrapper = document.getElementById('ac-wrapper');
+const saveButton = document.getElementById('save');
+const username_display = document.getElementById('username-display');
+let isCanEnter = false;
+let username = '';
+// document.addEventListener("keypress", function (event) {
+//   // console.log(nameInput.value);
+
+//   if (event.key === "Enter") {
+//     // event.preventDefault();
+//     // let name = nameInput.value;
+
+//     // if (event.value) {
+//     // let code = event.value.charAt(event.value.length - 1);
+//     // event.preventDefault();
+//     // console.log(code);
+//     // if (code.keyCode == 13){
+
+
+//     // console.log(name);
+//     console.log(nameInput.value);
+
+//     hidePopup();
+
+
+//     // event.preventDefault();
+
+//   }
+// });
+// let name2 = '';
+// document.addEventListener("keypress", function (event) {
+//   if (event.key === "Enter") {
+//     event.preventDefault();
+//     // console.log(nameInput.value);
+//     if (name2 !== '') {
+//       popup.style.display = 'none';
+//       acwrapper.style.display = 'none';
+  
+//     } else {
+//       alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
+//     }
+//   }
+//   else{
+//     name2 = nameInput.value;
+//   }
+
+// });
+function hidePopup() {
+  if (nameInput.value.trim() !== '') {
+    popup.style.display = 'none';
+    acwrapper.style.display = 'none';
+    isCanEnter=true;
+    username = nameInput.value;
+    username_display.innerText=username;
+    // document.getElementById('username-display').innerText = `User: ${username}`;
+    console.log(nameInput.value);
+  } else {
+    alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
+  }
+}
 const videoGrid = document.getElementById('video-grid');
 
 const myVideo = document.createElement('video');
@@ -12,10 +79,7 @@ var peer = new Peer(undefined, {
 });
 let myVideoStream;
 
-// 
 
-
-// 
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -42,22 +106,51 @@ navigator.mediaDevices.getUserMedia({
     if (peers[userId]) peers[userId].close()
 
   })
-  let text = $('input');
 
+
+  let text = $('#chat_messages');
+ 
   $('html').keydown((e) => {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
+    console.log(text.val());
+    if (e.which == 13 && text.val().length !== 0 && isCanEnter) {
+      // socket.emit('message', text.val());
+      socket.emit('message', { username, message: text.val() });
       text.val('');
     }
+    
+    
   })
 
-  socket.on('createMessage', message => {
+  // socket.on('createMessage', message => {
 
 
-    $('.messages').append(`<li class="message"><b>user</b><br/>${message}</li>`);
+  //   $('.messages').append(`<li class="message"><b>user${nameInput.value}</b><br/>${message}</li>`);
+  //   scrollToBottom();
+  // })
+  socket.on('createMessage', data => {
+    const { username, message } = data;
+    $('.messages').append(`<li class="message"><b>${username}</b><br/>${message}</li>`);
     scrollToBottom();
   })
 })
+// const leaveMeeting = (ROOM_ID) => {
+//   console.log('leaving meeting')
+//   socket.emit('disconnect', ROOM_ID);
+// //   if (peers[userId]) {
+// //     peers[userId].close();
+// // }
+// }
+const leaveMeeting = (ROOM_ID) => {
+  console.log('leaving meeting')
+  socket.disconnect();
+  const confirmationMessage = "Are you sure you want to leave the meeting?";
+  if (confirm(confirmationMessage)) {
+    this.window.close(); // Close the browser window
+  }
+  // socket.emit('leave-room', ROOM_ID);
+  // Additional logic if needed
+}
+
 
 // socket.on('user-disconnected', userId => {
 //     if (peers[userId]) peers[userId].close()
@@ -161,7 +254,7 @@ const updateClock = () => {
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const formattedTime = `${hours}:${minutes}`;
 
-  currentTimeElement.textContent = ` ${formattedTime}`;
+  currentTimeElement.textContent = ` | ${formattedTime}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -208,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (elementToRemove) {
         elementToRemove.remove();
       }
-    }, 2200); 
+    }, 2200);
   }
 });
+
