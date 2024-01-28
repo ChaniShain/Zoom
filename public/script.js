@@ -1,17 +1,26 @@
 
 const socket = io('/');
-// $(document).ready(function(){
-//   setTimeout(function(){
-//      PopUp();
-//   },1000); // 5000 to load it after 5 seconds from page load
-// });
+
 const nameInput = document.getElementById('name');
 const popup = document.getElementById('popup');
 const acwrapper = document.getElementById('ac-wrapper');
 const saveButton = document.getElementById('save');
 const username_display = document.getElementById('username-display');
-let isCanEnter = false;
+let isCanEnter = true;
 let username = '';
+// username = document.cookie.getItem('username');
+// username_display.innerText = username;
+const cookies = document.cookie.split(';');
+for (const cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'username') {
+      username = decodeURIComponent(value);
+        // username = value;
+        username_display.innerText = username;
+        break;
+    }
+}
+
 // document.addEventListener("keypress", function (event) {
 //   // console.log(nameInput.value);
 
@@ -44,7 +53,7 @@ let username = '';
 //     if (name2 !== '') {
 //       popup.style.display = 'none';
 //       acwrapper.style.display = 'none';
-  
+
 //     } else {
 //       alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
 //     }
@@ -54,19 +63,21 @@ let username = '';
 //   }
 
 // });
-function hidePopup() {
-  if (nameInput.value.trim() !== '') {
-    popup.style.display = 'none';
-    acwrapper.style.display = 'none';
-    isCanEnter=true;
-    username = nameInput.value;
-    username_display.innerText=username;
-    // document.getElementById('username-display').innerText = `User: ${username}`;
-    console.log(nameInput.value);
-  } else {
-    alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
-  }
-}
+// function hidePopup() {
+//   if (nameInput.value.trim() !== '') {
+//     popup.style.display = 'none';
+//     acwrapper.style.display = 'none';
+//     isCanEnter=true;
+//     username = nameInput.value;
+//     username_display.innerText=username;
+//     // document.getElementById('username-display').innerText = `User: ${username}`;
+//     console.log(nameInput.value);
+
+//     document.querySelector('.main_videos').style.display = 'block';
+//   } else {
+//     alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
+//   }
+// }
 const videoGrid = document.getElementById('video-grid');
 
 const myVideo = document.createElement('video');
@@ -109,7 +120,7 @@ navigator.mediaDevices.getUserMedia({
 
 
   let text = $('#chat_messages');
- 
+
   $('html').keydown((e) => {
     console.log(text.val());
     if (e.which == 13 && text.val().length !== 0 && isCanEnter) {
@@ -117,8 +128,8 @@ navigator.mediaDevices.getUserMedia({
       socket.emit('message', { username, message: text.val() });
       text.val('');
     }
-    
-    
+
+
   })
 
   // socket.on('createMessage', message => {
