@@ -8,6 +8,13 @@ const saveButton = document.getElementById('save');
 const username_display = document.getElementById('username-display');
 let isCanEnter = true;
 let username = '';
+// 
+// document.getElementById('loginForm').addEventListener('submit', function (event) {
+  // event.preventDefault();
+
+  // Show loading element
+  // const loadingElement = document.getElementById('loading');
+  // loadingElement.classList.add('active');
 // username = document.cookie.getItem('username');
 // username_display.innerText = username;
 const cookies = document.cookie.split(';');
