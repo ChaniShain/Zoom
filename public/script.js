@@ -8,15 +8,7 @@ const saveButton = document.getElementById('save');
 const username_display = document.getElementById('username-display');
 let isCanEnter = true;
 let username = '';
-// 
-// document.getElementById('loginForm').addEventListener('submit', function (event) {
-  // event.preventDefault();
 
-  // Show loading element
-  // const loadingElement = document.getElementById('loading');
-  // loadingElement.classList.add('active');
-// username = document.cookie.getItem('username');
-// username_display.innerText = username;
 const cookies = document.cookie.split(';');
 for (const cookie of cookies) {
     const [name, value] = cookie.trim().split('=');
@@ -28,63 +20,7 @@ for (const cookie of cookies) {
     }
 }
 
-// document.addEventListener("keypress", function (event) {
-//   // console.log(nameInput.value);
 
-//   if (event.key === "Enter") {
-//     // event.preventDefault();
-//     // let name = nameInput.value;
-
-//     // if (event.value) {
-//     // let code = event.value.charAt(event.value.length - 1);
-//     // event.preventDefault();
-//     // console.log(code);
-//     // if (code.keyCode == 13){
-
-
-//     // console.log(name);
-//     console.log(nameInput.value);
-
-//     hidePopup();
-
-
-//     // event.preventDefault();
-
-//   }
-// });
-// let name2 = '';
-// document.addEventListener("keypress", function (event) {
-//   if (event.key === "Enter") {
-//     event.preventDefault();
-//     // console.log(nameInput.value);
-//     if (name2 !== '') {
-//       popup.style.display = 'none';
-//       acwrapper.style.display = 'none';
-
-//     } else {
-//       alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
-//     }
-//   }
-//   else{
-//     name2 = nameInput.value;
-//   }
-
-// });
-// function hidePopup() {
-//   if (nameInput.value.trim() !== '') {
-//     popup.style.display = 'none';
-//     acwrapper.style.display = 'none';
-//     isCanEnter=true;
-//     username = nameInput.value;
-//     username_display.innerText=username;
-//     // document.getElementById('username-display').innerText = `User: ${username}`;
-//     console.log(nameInput.value);
-
-//     document.querySelector('.main_videos').style.display = 'block';
-//   } else {
-//     alert("Please enter your name."); // אפשר גם להציג הודעה אחרת
-//   }
-// }
 const videoGrid = document.getElementById('video-grid');
 
 const myVideo = document.createElement('video');
