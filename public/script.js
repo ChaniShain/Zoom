@@ -259,3 +259,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// פונקציה שמכניסה את ה-URL לתוך ה-input
+window.onload = function () {
+  const currentUrl = window.location.href;
+  document.getElementById("current-url").value = currentUrl;
+}
+
+// פונקציה להעתקת ה-URL ללוח ההעתקה
+function copyCurrentUrl() {
+  const urlInput = document.getElementById("current-url");
+  urlInput.select();
+  urlInput.setSelectionRange(0, 99999); // לתמיכה במובייל
+  navigator.clipboard.writeText(urlInput.value)
+      .then(() => alert("הקישור הועתק בהצלחה!"))
+      .catch(err => console.error("שגיאה בהעתקה:", err));
+}
+function closeFloatingBox() {
+  const floatingBox = document.getElementById("floating-url-box");
+  floatingBox.style.display = "none";
+}

@@ -27,7 +27,33 @@
             </div>
         </div>
     </div> -->
+    
 
+    <!-- <div id="floating-url-box">
+        <h3 style="margin: 0;">הקישור שלך מוכן!</h3>
+        <br>
+        <input type="text" id="current-url" readonly>
+        <button id="copy-url-button" onclick="copyCurrentUrl()">
+            <i class="fa fa-copy"></i>
+        </button>
+        <br>
+        <p style="font-size: 12px; color: gray;">ניתן לשתף את הקישור עם אחרים</p>
+
+    </div>
+     -->
+     <div id="floating-url-box">
+        <button id="close-floating-box" onclick="closeFloatingBox()">&#10005;</button>
+        <h3 class="floating-title">הפגישה שלך מוכנה!</h3>
+        <p class="floating-description">אפשר גם לשתף את הקישור לפגישה עם מי שרוצים להזמין אליה</p>
+        <div class="floating-url-container">
+            <input type="text" id="current-url" readonly value="meet.google.com/qad-yctn-tvr">
+            <button id="copy-url-button" onclick="copyCurrentUrl()">
+                <i class="fa fa-copy"></i>
+            </button>
+        </div>
+        
+    </div>
+    <!--  -->
     <div class="main">
         <div class="main_left">
             <!-- style="display: none;" -->
@@ -53,18 +79,7 @@
 
                 </div>
                 <div class="main_controls_block">
-                    <!-- <div class="main_controls_button">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Security</span>
-                        </div>
-                        <div class="main_controls_button">
-                            <i class="fas fa-user-alt"></i>
-                            <span>Participants</span>
-                        </div>
-                        <div class="main_controls_button">
-                            <i class="fas fa-comment-alt"></i>
-                            <span>Chat</span>
-                        </div> -->
+                  
                     <div onclick="muteUnmute()" class="main_controls_button main_mute_button">
                         <i class="fa-solid fa-microphone"></i>
                         <span>Mute</span>
